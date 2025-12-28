@@ -4,9 +4,9 @@
     "auto_start": false,
     "drawing_grid_size": 25,
     "grid_size": 75,
-    "name": "Finalportscanner_Project",
-    "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "revision": 9,
+    "name": "Finalportscanner_Security_Project",
+    "project_id": "b2c3d4e5-f6g7-8901-bcde-f12345678901",
+    "revision": 10,
     "scene_height": 1000,
     "scene_width": 2000,
     "show_grid": false,
@@ -24,24 +24,48 @@
                 "filters": {},
                 "link_id": "l1",
                 "nodes": [
-                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "eth0", "x": 67, "y": -11}, "node_id": "n1", "port_number": 0},
-                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "f0/0", "x": -17, "y": -11}, "node_id": "sw1", "port_number": 0}
+                    {"adapter_number": 0, "node_id": "n1", "port_number": 0},
+                    {"adapter_number": 0, "node_id": "sw1", "port_number": 0}
                 ]
             },
             {
                 "filters": {},
                 "link_id": "l2",
                 "nodes": [
-                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "eth0", "x": 67, "y": -11}, "node_id": "n2", "port_number": 0},
-                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "f0/1", "x": -17, "y": -11}, "node_id": "sw1", "port_number": 1}
+                    {"adapter_number": 0, "node_id": "n_ids", "port_number": 0},
+                    {"adapter_number": 0, "node_id": "sw1", "port_number": 1}
                 ]
             },
             {
                 "filters": {},
                 "link_id": "l3",
                 "nodes": [
-                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "eth0", "x": 67, "y": -11}, "node_id": "n3", "port_number": 0},
-                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "f0/2", "x": -17, "y": -11}, "node_id": "sw1", "port_number": 2}
+                    {"adapter_number": 0, "node_id": "n_ips", "port_number": 0},
+                    {"adapter_number": 0, "node_id": "sw1", "port_number": 2}
+                ]
+            },
+            {
+                "filters": {},
+                "link_id": "l4",
+                "nodes": [
+                    {"adapter_number": 1, "node_id": "n_ips", "port_number": 1},
+                    {"adapter_number": 0, "node_id": "sw2", "port_number": 0}
+                ]
+            },
+            {
+                "filters": {},
+                "link_id": "l5",
+                "nodes": [
+                    {"adapter_number": 0, "node_id": "n2", "port_number": 0},
+                    {"adapter_number": 0, "node_id": "sw2", "port_number": 1}
+                ]
+            },
+            {
+                "filters": {},
+                "link_id": "l6",
+                "nodes": [
+                    {"adapter_number": 0, "node_id": "n3", "port_number": 0},
+                    {"adapter_number": 0, "node_id": "sw2", "port_number": 2}
                 ]
             }
         ],
@@ -50,69 +74,85 @@
                 "compute_id": "local",
                 "console": 5001,
                 "console_type": "telnet",
-                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Scanner-Node", "x": 0, "y": -25},
+                "label": {"text": "Scanner-Node", "x": -300, "y": 0},
                 "name": "Scanner-Node",
                 "node_id": "n1",
                 "node_type": "docker",
-                "properties": {
-                    "image": "ubuntu:latest",
-                    "adapters": 1,
-                    "container_id": "c1",
-                    "extra_hosts": "Target-1:192.168.1.21;Target-2:192.168.1.22"
-                },
+                "properties": {"image": "ubuntu:latest"},
                 "symbol": ":/symbols/linux_guest.svg",
-                "x": -200,
+                "x": -300,
+                "y": 0
+            },
+            {
+                "compute_id": "local",
+                "console": 5004,
+                "console_type": "telnet",
+                "label": {"text": "IDS-Node", "x": -150, "y": -150},
+                "name": "IDS-Node",
+                "node_id": "n_ids",
+                "node_type": "docker",
+                "properties": {"image": "snort:latest"},
+                "symbol": ":/symbols/ids.svg",
+                "x": -150,
+                "y": -150
+            },
+            {
+                "compute_id": "local",
+                "console": 5005,
+                "console_type": "telnet",
+                "label": {"text": "IPS-Node", "x": 0, "y": 0},
+                "name": "IPS-Node",
+                "node_id": "n_ips",
+                "node_type": "docker",
+                "properties": {
+                    "image": "snort:latest",
+                    "adapters": 2,
+                    "startup_config": "/etc/snort/rules/local.rules"
+                },
+                "symbol": ":/symbols/ips.svg",
+                "x": 0,
                 "y": 0
             },
             {
                 "compute_id": "local",
                 "console": 5002,
                 "console_type": "telnet",
-                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Target-1", "x": 0, "y": -25},
+                "label": {"text": "Target-1", "x": 300, "y": -100},
                 "name": "Target-1",
                 "node_id": "n2",
                 "node_type": "docker",
-                "properties": {
-                    "image": "alpine:latest",
-                    "adapters": 1
-                },
+                "properties": {"image": "alpine:latest"},
                 "symbol": ":/symbols/server.svg",
-                "x": 200,
+                "x": 300,
                 "y": -100
             },
             {
                 "compute_id": "local",
                 "console": 5003,
                 "console_type": "telnet",
-                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Target-2", "x": 0, "y": -25},
+                "label": {"text": "Target-2", "x": 300, "y": 100},
                 "name": "Target-2",
                 "node_id": "n3",
                 "node_type": "docker",
-                "properties": {
-                    "image": "alpine:latest",
-                    "adapters": 1
-                },
+                "properties": {"image": "alpine:latest"},
                 "symbol": ":/symbols/server.svg",
-                "x": 200,
+                "x": 300,
                 "y": 100
             },
             {
                 "compute_id": "local",
-                "console": null,
-                "console_type": "none",
-                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Switch-1", "x": 0, "y": -25},
                 "name": "Switch-1",
                 "node_id": "sw1",
                 "node_type": "ethernet_switch",
-                "properties": {
-                    "ports_mapping": [
-                        {"name": "f0/0", "port_number": 0, "type": "access", "vlan": 1},
-                        {"name": "f0/1", "port_number": 1, "type": "access", "vlan": 1},
-                        {"name": "f0/2", "port_number": 2, "type": "access", "vlan": 1}
-                    ]
-                },
-                "symbol": ":/symbols/ethernet_switch.svg",
-                "x": 0,
+                "x": -150,
+                "y": 0
+            },
+            {
+                "compute_id": "local",
+                "name": "Switch-2",
+                "node_id": "sw2",
+                "node_type": "ethernet_switch",
+                "x": 150,
                 "y": 0
             }
         ]
