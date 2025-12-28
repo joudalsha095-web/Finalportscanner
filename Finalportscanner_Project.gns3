@@ -1,0 +1,120 @@
+{
+    "auto_close": true,
+    "auto_open": false,
+    "auto_start": false,
+    "drawing_grid_size": 25,
+    "grid_size": 75,
+    "name": "Finalportscanner_Project",
+    "project_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "revision": 9,
+    "scene_height": 1000,
+    "scene_width": 2000,
+    "show_grid": false,
+    "show_interface_labels": true,
+    "show_layers": false,
+    "snap_to_grid": false,
+    "supplier": null,
+    "variables": null,
+    "zoom": 100,
+    "topology": {
+        "computes": [],
+        "drawings": [],
+        "links": [
+            {
+                "filters": {},
+                "link_id": "l1",
+                "nodes": [
+                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "eth0", "x": 67, "y": -11}, "node_id": "n1", "port_number": 0},
+                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "f0/0", "x": -17, "y": -11}, "node_id": "sw1", "port_number": 0}
+                ]
+            },
+            {
+                "filters": {},
+                "link_id": "l2",
+                "nodes": [
+                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "eth0", "x": 67, "y": -11}, "node_id": "n2", "port_number": 0},
+                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "f0/1", "x": -17, "y": -11}, "node_id": "sw1", "port_number": 1}
+                ]
+            },
+            {
+                "filters": {},
+                "link_id": "l3",
+                "nodes": [
+                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "eth0", "x": 67, "y": -11}, "node_id": "n3", "port_number": 0},
+                    {"adapter_number": 0, "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "f0/2", "x": -17, "y": -11}, "node_id": "sw1", "port_number": 2}
+                ]
+            }
+        ],
+        "nodes": [
+            {
+                "compute_id": "local",
+                "console": 5001,
+                "console_type": "telnet",
+                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Scanner-Node", "x": 0, "y": -25},
+                "name": "Scanner-Node",
+                "node_id": "n1",
+                "node_type": "docker",
+                "properties": {
+                    "image": "ubuntu:latest",
+                    "adapters": 1,
+                    "container_id": "c1",
+                    "extra_hosts": "Target-1:192.168.1.21;Target-2:192.168.1.22"
+                },
+                "symbol": ":/symbols/linux_guest.svg",
+                "x": -200,
+                "y": 0
+            },
+            {
+                "compute_id": "local",
+                "console": 5002,
+                "console_type": "telnet",
+                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Target-1", "x": 0, "y": -25},
+                "name": "Target-1",
+                "node_id": "n2",
+                "node_type": "docker",
+                "properties": {
+                    "image": "alpine:latest",
+                    "adapters": 1
+                },
+                "symbol": ":/symbols/server.svg",
+                "x": 200,
+                "y": -100
+            },
+            {
+                "compute_id": "local",
+                "console": 5003,
+                "console_type": "telnet",
+                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Target-2", "x": 0, "y": -25},
+                "name": "Target-2",
+                "node_id": "n3",
+                "node_type": "docker",
+                "properties": {
+                    "image": "alpine:latest",
+                    "adapters": 1
+                },
+                "symbol": ":/symbols/server.svg",
+                "x": 200,
+                "y": 100
+            },
+            {
+                "compute_id": "local",
+                "console": null,
+                "console_type": "none",
+                "label": {"rotation": 0, "style": "font-family: Geneva; font-size: 10; font-weight: bold; fill: #000000; fill-opacity: 1.0;", "text": "Switch-1", "x": 0, "y": -25},
+                "name": "Switch-1",
+                "node_id": "sw1",
+                "node_type": "ethernet_switch",
+                "properties": {
+                    "ports_mapping": [
+                        {"name": "f0/0", "port_number": 0, "type": "access", "vlan": 1},
+                        {"name": "f0/1", "port_number": 1, "type": "access", "vlan": 1},
+                        {"name": "f0/2", "port_number": 2, "type": "access", "vlan": 1}
+                    ]
+                },
+                "symbol": ":/symbols/ethernet_switch.svg",
+                "x": 0,
+                "y": 0
+            }
+        ]
+    }
+}
